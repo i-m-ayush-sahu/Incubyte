@@ -69,6 +69,15 @@ But null values are less than 1% of the data. That's why this will not impact ov
     04:00 PM: $387,796,875
     09:00 PM: $387,742,054
 
+  Sales Trend by Day of the Week
+    Highest sales occur on weekends, 
+    with Sunday generating the most revenue (₹1,336,577,019), 
+    followed closely by Saturday (₹1,329,994,859).
+
+  Monthly Sales Performance
+    August 2022 saw the highest sales at ₹822,157,143, followed by May 2022 (₹819,562,672) and March 2022 (₹818,874,213).
+    December 2022 had the lowest recorded sales (₹342,380,998), which might indicate a seasonal slowdown.
+
 7. Store Performance by Region
   Average Transaction Amount by Region & Store Type:
     East (Online): $22,858
