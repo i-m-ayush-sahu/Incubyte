@@ -142,6 +142,46 @@ Hour    Total_Revenue
 16:00	  387796875
 21:00	  387742054
 
+-- Sales Trend by Day of the Week
+SELECT FORMAT_DATE('%A', DATE(TransactionDate)) AS Day, 
+       ROUND(SUM(TransactionAmount)) AS Total_Revenue
+FROM sales_data
+GROUP BY Day
+ORDER BY Total_Revenue DESC;
+
+Day    Total_Revenue
+Sunday    1336577019
+Saturday  1329994859
+Tuesday   1325223273
+Monday    1314868588
+Thursday  1292167715
+Friday    1291704189
+Wednesday    1287208464
+null        1024918853
+
+
+-- Monthly Sales Performance
+SELECT CONCAT(FORMAT_DATETIME("%B", DATETIME(TransactionDate)) ,'-',EXTRACT(YEAR from DATETIME(TransactionDate)))  AS  YearMonth,
+       ROUND(SUM(TransactionAmount)) AS Total_Revenue
+FROM sales_data
+GROUP BY YearMonth
+ORDER BY Total_Revenue DESC;
+
+YearMonth    Total_Revenue
+null          1024918853
+August-2022   822157143
+May-2022      819562672
+March-2022    818874213
+July-2022     817029613
+October-2022  815402572
+January-2022  814518653
+April-2022    801872067
+November-2022 799945428
+September-2022    791350040
+June-2022      790468924
+February-2022    744181785
+December-2022    342380998
+
 
 -- Average Transaction Amount by Region and StoreType
 SELECT Region, StoreType, ROUND(AVG(TransactionAmount)) AS Avg_Transaction_Amount FROM sales_data GROUP BY Region, StoreType ORDER BY Avg_Transaction_Amount DESC;
@@ -245,6 +285,15 @@ Peak Sales Hours:
     13:00	  388266180
     16:00	  387796875
     21:00	  387742054
+
+Sales Trend by Day of the Week
+    Highest sales occur on weekends, 
+    with Sunday generating the most revenue (₹1,336,577,019), 
+    followed closely by Saturday (₹1,329,994,859).
+
+Monthly Sales Performance
+    August 2022 saw the highest sales at ₹822,157,143, followed by May 2022 (₹819,562,672) and March 2022 (₹818,874,213).
+    December 2022 had the lowest recorded sales (₹342,380,998), which might indicate a seasonal slowdown.
 
 Average Transaction Amount by Region and StoreType:
   Region	Store Type	Avg Transaction Amount 
