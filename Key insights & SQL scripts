@@ -2,30 +2,27 @@
 SELECT ROUND(SUM(TransactionAmount)) AS Total_Revenue FROM sales_data;
 
 Total_Revenue
-10,202,662,960
-
+10202662960
 
 -- Top-Selling Products
 SELECT ProductName, ROUND(SUM(TransactionAmount)) AS Total_Revenue FROM sales_data GROUP BY ProductName ORDER BY Total_Revenue DESC LIMIT 5;
 
 ProductName  Total_Revenue
-Laptop     6,231,220,000
-Sofa       3,777,023,000
-T-Shirt    102,306,100
-Notebook   24,079,590
-Apple      22,300,720
-
+Laptop       6231220430
+Sofa         3777022904	
+T-Shirt      102306079	
+null         45733243
+Notebook     24079586
 
 --Sales By Region Higher to Lower
-SELECT Region, ROUND(SUM(TransactionAmount)) AS Total_Revenue FROM sales_data GROUP BY Region ORDER BY Total_Revenue 
-GROUP BY Region ORDER BY Total_Revenue DESC;
+SELECT Region, ROUND(SUM(TransactionAmount)) AS Total_Revenue FROM sales_data GROUP BY Region ORDER BY Total_Revenue DESC;
 
 Region   Total_Revenue
-South    3,177,273,000
-East     2,654,969,000
-North    2,171,503,000
-West     2,159,912,000
-
+South    3177273109
+East     2654969083
+North    2171502698
+West     2159911846	
+null     39006224
 
 -- Age Group Buying Patterns
 SELECT CASE 
@@ -37,19 +34,19 @@ SELECT CASE
 FROM sales_data GROUP BY Age_Group ORDER BY Total_Spending DESC;
 
 Age_Group Total_Spending
- 41-60   3,564,645,000
- 26-40   2,686,973,000
- 60+     2,528,918,000
-18-25    1,422,127,000
-
+ 41-60   3564645119
+ 26-40   2686973098
+ 60+     2528917944
+18-25    1422126799
 
 -- Gender-based Spending
 SELECT CustomerGender, ROUND(AVG(TransactionAmount),2) AS Avg_Spending FROM sales_data GROUP BY CustomerGender;
-CustomerGender  Avg_Spending
-Male             22,657.76 
-Female           22,483.29 
-Other            22,571.69 
 
+CustomerGender  Avg_Spending
+Male             22657.76 
+Female           22483.29 
+Other            22571.69 
+null             914.66
 
 -- Discount Impact
 SELECT 
@@ -67,12 +64,12 @@ GROUP BY Discount_Range
 ORDER BY Discount_Range;
 
 Discount_Range  Sales_Count
-0-10%            99,863 
-11-20%           90,416 
-21-30%           89,768 
-31-40%           90,472 
-41-50%           89,843 
-50%+             39,638 
+0-10%            99863 
+11-20%           90416 
+21-30%           89768 
+31-40%           90472 
+41-50%           89843 
+50%+             39638 
 
 
 -- Promotional Sales Contribution
@@ -88,8 +85,8 @@ GROUP BY Sales_Type
 ORDER BY Revenue_Percentage DESC;
 
 Sales_Type              Total_Revenue          Revenue_Percentage
-Non-Promotional Sales  5,103,816,000            50.02
-Promotional Sales      5,098,847,000            49.98
+Non-Promotional Sales  5103816282              50.02
+Promotional Sales      5098846678              49.98
 
 
 -- High Return Rate Products
@@ -102,22 +99,22 @@ GROUP BY ProductName
 ORDER BY Return_Count DESC 
 LIMIT 5;
 
-
 ProductName  Return_Count  Return_Percentage
-Notebook     45,061        18.06
-Apple        45,033        18.05
-Laptop       44,904        18.00
-T-Shirt      44,783        17.95
-Sofa         44,696        17.92
+Notebook     45061        18.06
+Apple        45033        18.05
+Laptop       44904        18.00
+T-Shirt      44783        17.95
+Sofa         44696        17.92
 
 
 -- Customer Satisfaction Ratings
-SELECT ProductName, AVG(FeedbackScore) AS Avg_Feedback FROM sales_data GROUP BY ProductName ORDER BY Avg_Feedback DESC ;
+SELECT ProductName, ROUND(AVG(FeedbackScore),2) AS Avg_Feedback FROM sales_data GROUP BY ProductName ORDER BY Avg_Feedback DESC ;
 
 ProductName  Avg_Feedback
 Sofa         3.00
 Apple        3.00
 Notebook     3.00
+null         2.99
 T-Shirt      2.99
 Laptop       2.99
 
@@ -128,35 +125,36 @@ ROUND((SUM(TransactionAmount) * 100 / (SELECT SUM(TransactionAmount)
 FROM sales_data)),2) AS Revenue_Percentage FROM sales_data GROUP BY PaymentMethod ORDER BY Total_Revenue DESC;
 
 PaymentMethod   Total_Revenue      Revenue_Percentage
-Cash            2,556,679,000      25.17
-Debit Card      2,552,366,000      25.13
-UPI             2,530,177,000      24.91
-Credit Card     2,517,707,000      24.79
+Cash            2556679197          25.17
+Debit Card      2552366144          25.13
+UPI             2530177440          24.91
+Credit Card     2517706936          24.79
+null            45733243            0.45
 
 
 -- Peak Sales Hours
 SELECT EXTRACT(HOUR FROM TransactionDate) AS Hour, ROUND(SUM(TransactionAmount)) AS Total_Revenue FROM sales_data GROUP BY Hour ORDER BY Total_Revenue DESC LIMIT 5;
 
 Hour    Total_Revenue
-06:00	  390,138,600
-02:00	  388,926,100
-13:00	  388,266,200
-16:00	  387,796,900
-21:00	  387,742,100
+06:00	  390138587
+02:00	  388926069
+13:00	  388266180
+16:00	  387796875
+21:00	  387742054
 
 
 -- Average Transaction Amount by Region and StoreType
 SELECT Region, StoreType, ROUND(AVG(TransactionAmount)) AS Avg_Transaction_Amount FROM sales_data GROUP BY Region, StoreType ORDER BY Avg_Transaction_Amount DESC;
 
 Region	Store Type	Avg Transaction Amount 
-East	  Online	    22,858
-East	  In-Store	  22,654
-South	  In-Store	  22,601
-North	  Online	    22,595
-North	  In-Store	  22,567
-West	  In-Store	  22,541
-West	  Online	    22,379
-South	  Online	    22,373
+East	  Online	    22858
+East	  In-Store	    22654
+South	  In-Store	    22601
+North	  Online	    22595
+North	  In-Store	    22567
+West	  In-Store	    22541
+West	  Online	    22379
+South	  Online	    22373
 
 
 -- Customer Loyalty Impact on Spending
@@ -167,51 +165,56 @@ SELECT CASE
     ROUND(AVG(TransactionAmount)) AS Avg_Spending FROM sales_data GROUP BY Loyalty_Category ORDER BY Avg_Spending DESC;
 
 Loyalty_Category	Avg_Spending
-High	            20,444
-Medium	          20,401
-Low	              20,230
+High	            20444
+Medium	            20401
+Low	                20230
 
 -- Online vs. In-Store Sales
 SELECT StoreType, ROUND(SUM(TransactionAmount)) AS Total_Revenue, ROUND((SUM(TransactionAmount) * 100 / (SELECT SUM(TransactionAmount) FROM sales_data)),2) AS Revenue_Percentage 
 FROM sales_data GROUP BY StoreType;
 StoreType        Total_Revenue    Revenue_Percentage
-In-Store Sales   5,078,882,000    50.00
-Online Sales     5,078,048,000    49.99
+In-Store Sales   5078881503       49.78
+Online Sales     5078048215       49.77	
+null             45733243         0.45
+
 
 
 Overall Key Insights
 Total Revenue: 10,202,662,960
 
 Top-Selling Products by Revenue: 
-    Laptop     6,231,220,000
-    Sofa       3,777,023,000
-    T-Shirt    102,306,100
-    Notebook   24,079,590
-    Apple      22,300,720
+    ProductName  Total_Revenue
+    Laptop       6231220430
+    Sofa         3777022904	
+    T-Shirt      102306079	
+    null         45733243
+    Notebook     24079586
 
-Highest-Selling Region: South Region (3,177,273,000)
+Highest-Selling Region: South Region (3177273109)
 
 Age Group with Highest Spending:
-    41-60  (3,564,645,000)
+    41-60  (3564645119)
+
 Gender-Based Spending:
     CustomerGender  Avg_Spending
-    Male             22,657.76 
-    Female           22,483.29 
-    Other            22,571.69 
+    Male             22657.76 
+    Female           22483.29 
+    Other            22571.69 
+    null             914.66
     
 Impact of Discounts:
     Discount_Range  Sales_Count
-    0-10%            99,863 
-    11-20%           90,416 
-    21-30%           89,768 
-    31-40%           90,472 
-    41-50%           89,843 
-    50%+             39,638 
+    0-10%            99863 
+    11-20%           90416 
+    21-30%           89768 
+    31-40%           90472 
+    41-50%           89843 
+    50%+             39638 
 
 Promotional Sales Contribution:
-Promotional Transactions: Promotional Sales 5,098,847,000(49.98% of total revenue).
+Promotional Transactions: Promotional Sales 5098846678(49.98% of total revenue).
 
-    Return Rates (Most Returned Products):
+Return Rates (Most Returned Products):
     Notebook:   18.06% return rate
     Apple:      18.05% return rate
     Laptop:     18.00% return rate
@@ -219,46 +222,49 @@ Promotional Transactions: Promotional Sales 5,098,847,000(49.98% of total revenu
     Sofa:       17.92% return rate
 
 Customer Satisfaction (Highest Feedback Score):
+    ProductName  Avg_Feedback
     Sofa         3.00
     Apple        3.00
     Notebook     3.00
+    null         2.99
     T-Shirt      2.99
     Laptop       2.99
 
 Revenue Contribution by Payment Method:
     PaymentMethod   Total_Revenue      Revenue_Percentage
-    Cash            2,556,679,000      25.17
-    Debit Card      2,552,366,000      25.13
-    UPI             2,530,177,000      24.91
-    Credit Card     2,517,707,000      24.79
-
+    Cash            2556679197          25.17
+    Debit Card      2552366144          25.13
+    UPI             2530177440          24.91
+    Credit Card     2517706936          24.79
+    null            45733243            0.45
 
 Peak Sales Hours:
-  Hour    Total_Revenue
-  06:00	  390,138,600
-  02:00	  388,926,100
-  13:00	  388,266,200
-  16:00	  387,796,900
-  21:00	  387,742,100
+    Hour    Total_Revenue
+    06:00	  390138587
+    02:00	  388926069
+    13:00	  388266180
+    16:00	  387796875
+    21:00	  387742054
 
 Average Transaction Amount by Region and StoreType:
   Region	Store Type	Avg Transaction Amount 
-  East	  Online	    22,858
-  East	  In-Store	  22,654
-  South	  In-Store	  22,601
-  North	  Online	    22,595
-  North	  In-Store	  22,567
-  West	  In-Store	  22,541
-  West	  Online	    22,379
-  South	  Online	    22,373
+    East	  Online	    22858
+    East	  In-Store	    22654
+    South	  In-Store	    22601
+    North	  Online	    22595
+    North	  In-Store	    22567
+    West	  In-Store	    22541
+    West	  Online	    22379
+    South	  Online	    22373
 
 Customer Loyalty Impact on Spending:
-  Loyalty_Category	Avg_Spending
-  High	            20,444
-  Medium	          20,401
-  Low	              20,230
+ Loyalty_Category	Avg_Spending
+    High	            20444
+    Medium	            20401
+    Low	                20230
 
 Online vs. In-Store Sales Contribution:
-  StoreType        Total_Revenue    Revenue_Percentage
-In-Store Sales   5,078,882,000    50.00
-Online Sales     5,078,048,000    49.99
+StoreType        Total_Revenue    Revenue_Percentage
+In-Store Sales   5078881503       49.78
+Online Sales     5078048215       49.77	
+null             45733243         0.45
