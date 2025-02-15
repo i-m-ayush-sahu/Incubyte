@@ -2,6 +2,7 @@
 #Process I follow for data analysis: - Created a table with the dataset you provided in Google BigQuery. And run SQL queries
 for data retrieval. Data contains null values in many fields, which can be ignored, or default values can be provided, e.g., 0, "-".
 But null values are less than 1% of the data. That's why this will not impact overall results. So I proceed with null values.
+While dealing with real world data one should provide defeault values in essentials fields for maintaing data integrity.
 
 1. Overall Sales Performance
   Total Revenue: $10,202,662,960
